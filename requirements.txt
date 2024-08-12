@@ -1,0 +1,11 @@
+#Set up environment variables:
+#- Create a `.env` file and add your OpenAI API key:
+ # ```
+ # OPENAI_API_KEY=sk-proj-W7sAuxMK1zxmk50o4yxNT3BlbkFJ2lpiuFPtnteNqW4WgcFh
+ # ```
+
+#Run the application:
+Flask
+openai
+pytesseract
+pdfminer.six

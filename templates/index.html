@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Documentation Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+        <h1>AI Legal Documentation Assistant</h1>
+        <div class="upload-section">
+            <h2>Upload Document</h2>
+            <input type="file" id="fileInput">
+            <button onclick="uploadDocument()">Upload</button>
+        </div>
+        <div class="query-section" style="display:none;">
+            <h2>Document Summary</h2>
+            <pre id="documentSummary"></pre>
+            <h2>Ask a Question</h2>
+            <input type="text" id="queryInput" placeholder="Type your question here">
+            <button onclick="askQuestion()">Ask</button>
+            <h2>Response</h2>
+            <pre id="responseText"></pre>
+        </div>
+        <div class="directories-section">
+            <h2>Directories</h2>
+            <ul id="directoriesList"></ul>
+        </div>
+        <footer>
+            <p>Created by <a href="mailto:dsam5238@gmail.com">Sam D</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/sam-d-220501245/">Sam D</a></p>
+        </footer>
+    
+    </div>
+    <script>
+        function uploadDocument() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById('documentSummary').textContent = data.summary;
+                    document.querySelector('.query-section').style.display = 'block';
+                }
+            });
+        }
+
+        function askQuestion() {
+            const queryInput = document.getElementById('queryInput');
+            const query = queryInput.value;
+            const summary = document.getElementById('documentSummary').textContent;
+            fetch('/query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: query, summary: summary })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('responseText').textContent = data.response;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/directories')
+            .then(response => response.json())
+            .then(data => {
+                const directoriesList = document.getElementById('directoriesList');
+                for (const [name, url] of Object.entries(data)) {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="${url}" target="_blank">${name}</a>`;
+                    directoriesList.appendChild(listItem);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;  /* Center content within the container */
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 150px; /* Adjust the size of the logo as needed */
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.upload-section, .query-section, .directories-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.upload-section input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.upload-section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.query-section input[type="text"], .query-section button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.query-section button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.directories-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.directories-section ul li {
+    margin-bottom: 5px;
+}
+
+.directories-section ul li a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.directories-section ul li a:hover {
+    text-decoration: underline;
+}
